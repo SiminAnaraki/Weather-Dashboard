@@ -9,3 +9,13 @@
 #today {
     border: 1px solid #000;
 }
+.iconImg {
+    width: 5%;
+    height:auto
+}
+.forecastIconImg {
+    width: 25%;
+}
+.eachDay {
+    background-color: #534e5e
+}

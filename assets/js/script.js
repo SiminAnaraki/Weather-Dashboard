@@ -1,6 +1,6 @@
 var searchInput = document.getElementById("search-input");
 var searchBtn = document.querySelector("#search-button");
-
+var APIkey = "f77c1d2200fbbe895365fd628bec16a4"
 var userInput 
 var oldInput
 var lat
@@ -71,22 +71,25 @@ function fetchData(name){
             var listResult = data.list
             var CityName = data.city.name
             var city = $("<h3>").text(`${CityName} ${dayjs.unix(listResult[0].dt).format("DD/MM/YYYY")}`)
+            var icon = $("<img>").attr("src",`https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`)
+            icon.addClass("iconImg")
             var CTemp = (data.list[0].main.temp) - 273.15
             var temp = $("<p>").text(`Temp: ${CTemp.toFixed(2)} ºC `)
             var wind = $("<p>").text(`Wind: ${data.list[0].wind.speed} KMP`)
             var humidity = $("<p>").text(`Humidity: ${data.list[0].main.humidity}%`)
-            $("#today").append(city,temp,wind,humidity)
+            $("#today").append(city,icon,temp,wind,humidity)
 
             for( var i = 0 ; i < listResult.length ; i+=8){
                 var day = $("<div>")
-                day.addClass("col-2 bg-secondary text-light ")
+                day.addClass("col-2 text-light eachDay")
                 var forecastTime = $("<h4>").text(dayjs.unix(listResult[i].dt).format("DD/MM/YY"))
-                var icon =$("<div>").text(listResult[i].weather.icon)
+                var forecastIcon =$("<img>").attr("src",`https://openweathermap.org/img/wn/${listResult[i].weather[0].icon}@2x.png`)
+                forecastIcon.addClass("forecastIconImg pt-2 pb-2")
                 var forecastCTemp = (data.list[i].main.temp) - 273.15
                 var forecastTemp = $("<p>").text(`Temp: ${forecastCTemp.toFixed(2)} ºC `)
                 var forecastWind = $("<p>").text(`Wind: ${data.list[i].wind.speed} KMP`)
                 var forecastHumidity = $("<p>").text(`Humidity: ${data.list[i].main.humidity}%`)
-                day.append(forecastTime,icon,forecastTemp,forecastWind,forecastHumidity)
+                day.append(forecastTime,forecastIcon,forecastTemp,forecastWind,forecastHumidity)
                 $("#forecast").append(day)
             }
     })
