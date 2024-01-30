@@ -18,7 +18,7 @@ function init(){
             var historyBtn = $("<button>")
             historyBtn.text(savedCity[i])
             $("#history").append(historyBtn)
-            historyBtn.addClass("btn btn-secondary mt-2 text-drak")
+            historyBtn.addClass("btn btn-secondary mt-2 text-dark")
             historyBtn.attr("id","newBtn")
             
         }
@@ -32,9 +32,11 @@ $(".list-group").on("click","#newBtn",historySearch);
 function search(event){
     event.preventDefault()
     userInput = searchInput.value.trim();
+    if (userInput){
     savedArray.push(userInput);
     localStorage.setItem("city",JSON.stringify(savedArray))
     fetchData(userInput)
+    }
 }
 
 function historySearch(event){
@@ -57,8 +59,7 @@ function fetchData(name){
             console.log(data)
             lon = data[0].lon
             lat = data[0].lat
-            console.log(lat)
-            console.log(lon)
+
 
         var queryURLNextFive = "http://api.openweathermap.org/data/2.5/forecast?"+"lat="+ lat+ "&lon="+lon+"&appid="+ APIkey
         fetch(queryURLNextFive)
@@ -75,18 +76,21 @@ function fetchData(name){
             var wind = $("<p>").text(`Wind: ${data.list[0].wind.speed} KMP`)
             var humidity = $("<p>").text(`Humidity: ${data.list[0].main.humidity}%`)
             $("#today").append(city,temp,wind,humidity)
-            for( var i = 0 ; i < listResult.length ; i++){
+
+            for( var i = 0 ; i < listResult.length ; i+=8){
                 var day = $("<div>")
-                var time = $("<h3>").text(dayjs.unix(listResult[i].dt).format("DD/MM/YY"))
-                day.append(time)
+                day.addClass("col-2 bg-secondary text-light ")
+                var forecastTime = $("<h4>").text(dayjs.unix(listResult[i].dt).format("DD/MM/YY"))
+                var icon =$("<div>").text(listResult[i].weather.icon)
+                var forecastCTemp = (data.list[i].main.temp) - 273.15
+                var forecastTemp = $("<p>").text(`Temp: ${forecastCTemp.toFixed(2)} ºC `)
+                var forecastWind = $("<p>").text(`Wind: ${data.list[i].wind.speed} KMP`)
+                var forecastHumidity = $("<p>").text(`Humidity: ${data.list[i].main.humidity}%`)
+                day.append(forecastTime,icon,forecastTemp,forecastWind,forecastHumidity)
                 $("#forecast").append(day)
             }
     })
      searchInput.value=""
+     $("#forecast").empty()
     })}}
-console.log(dayjs.unix(1706562000).format("DD/MM/YYYY HH mm"))
-console.log(dayjs.unix(1706572800).format("DD/MM/YYYY HH mm"))
-console.log(dayjs.unix(1706583600).format("DD/MM/YYYY HH mm"))
-console.log(dayjs.unix(1706594400).format("DD/MM/YYYY HH mm"))
-console.log(dayjs.unix(1706572800).format("DD/MM/YYYY HH mm"))
-console.log(dayjs.unix(1706572800).format("DD/MM/YYYY HH mm"))
+

@@ -6,3 +6,6 @@
 .form {
     width:100%
 }
+#today {
+    border: 1px solid #000;
+}
