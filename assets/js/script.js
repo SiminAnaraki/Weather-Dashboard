@@ -51,7 +51,16 @@ function search(event){
 function historySearch(event){
     event.preventDefault()
     oldInput = $(this).text()
-    fetchData(oldInput)
+    for (var k=0; k<savedArray.length ; k++){
+        if (savedArray[k]===oldInput){
+            savedArray.splice(k,1)
+            console.log(savedArray)
+            savedArray.unshift(oldInput)
+            console.log(savedArray)
+            localStorage.setItem("city",JSON.stringify(savedArray))
+            fetchData(oldInput)
+        }
+        }
 }
 //function to fetch weather data from the API
 function fetchData(name){
