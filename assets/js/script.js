@@ -81,7 +81,8 @@ function fetchData(name){
             var humidity = $("<p>").text(`Humidity: ${data.list[0].main.humidity}%`)
             $("#today").append(todayHeader,country,temp,wind,humidity)
             $("#today").addClass("today-border")
-
+            var forecastTitle = $("<h4>").text("5-Day Forecast")
+            $("#forecast").append(forecastTitle)
             for( var i = 7 ; i < listResult.length ; i+=8){
                 var day = $("<div>")
                 day.addClass("col-lg-2  col-sm-5  mt-1 text-light eachDay")
