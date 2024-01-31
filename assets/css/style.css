@@ -22,3 +22,6 @@
 .eachDay {
     background-color: #090979
 }
+.cap {
+    text-transform: capitalize;
+}

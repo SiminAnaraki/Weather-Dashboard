@@ -15,7 +15,7 @@ function init(){
         savedArray = savedCity
         for( var i = 0 ; i < savedCity.length ; i++){
             var historyBtn = $("<button>")
-            historyBtn.text(savedCity[i])
+            historyBtn.text(savedCity[i]).addClass("cap")
             $("#history").append(historyBtn)
             historyBtn.addClass("btn btn-secondary mt-2 text-dark")
             historyBtn.attr("id","newBtn")
