@@ -82,7 +82,7 @@ function fetchData(name){
             $("#today").append(todayHeader,country,temp,wind,humidity)
             $("#today").addClass("today-border")
 
-            for( var i = 0 ; i < listResult.length ; i+=8){
+            for( var i = 7 ; i < listResult.length ; i+=8){
                 var day = $("<div>")
                 day.addClass("col-lg-2  col-sm-5  mt-1 text-light eachDay")
                 var forecastTime = $("<h4>").text(dayjs.unix(listResult[i].dt).format("DD/MM/YY"))
