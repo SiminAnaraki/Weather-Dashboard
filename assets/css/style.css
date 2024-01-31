@@ -1,3 +1,6 @@
+.weather-header {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 51%, rgba(49,47,144,0.9836309523809523) 82%) !important;
+}
 .search-button,
 .form-input {
     margin-top: 10px;
@@ -6,7 +9,7 @@
 .form {
     width:100%
 }
-#today {
+.today-border {
     border: 1px solid #000;
 }
 .iconImg {
@@ -17,5 +20,5 @@
     width: 25%;
 }
 .eachDay {
-    background-color: #534e5e
+    background-color: #090979
 }
