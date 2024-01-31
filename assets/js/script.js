@@ -31,11 +31,22 @@ function search(event){
     event.preventDefault()
     userInput = searchInput.value.trim();
     if (userInput){
-    savedArray.push(userInput);
-    localStorage.setItem("city",JSON.stringify(savedArray))
-    fetchData(userInput)
-    }
-}
+        for (var j=0; j<savedArray.length ; j++){
+             if (savedArray[j]===userInput){
+                 savedArray.splice(j,1)
+                 console.log(savedArray)
+                 savedArray.unshift(userInput)
+                 console.log(savedArray)
+                 localStorage.setItem("city",JSON.stringify(savedArray))
+                 fetchData(userInput)
+                 return
+             }
+             }
+        savedArray.push(userInput);
+        localStorage.setItem("city",JSON.stringify(savedArray))
+        fetchData(userInput)
+        
+}}
 //function to handle history button click event
 function historySearch(event){
     event.preventDefault()
@@ -46,7 +57,6 @@ function historySearch(event){
 function fetchData(name){
     if(userInput||oldInput){
         var queryURL= "https://api.openweathermap.org/geo/1.0/direct?"+"q="+ name +"&appid="+ APIkey
-        console.log(queryURL)
         $("#today").empty()
         fetch(queryURL)
         .then(function(response){
