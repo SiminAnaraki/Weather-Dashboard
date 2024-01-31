@@ -20,8 +20,12 @@
     width: 25%;
 }
 .eachDay {
-    background-color: #090979
+    background-color: #090979;
+    border-radius: 5px;
 }
 .cap {
     text-transform: capitalize;
+}
+#forecast{
+    gap:10px
 }

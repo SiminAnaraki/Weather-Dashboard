@@ -67,22 +67,24 @@ function fetchData(name){
             console.log(data)
             var listResult = data.list
             var CityName = data.city.name
+            var countryName = data.city.country
             var todayHeader = $("<div>")
             todayHeader.addClass("d-flex align-items-center")
             var city = $("<h3>").text(`${CityName} ${dayjs.unix(listResult[0].dt).format("DD/MM/YYYY")}`)
             var icon = $("<img>").attr("src",`https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`)
             icon.addClass("iconImg")
             todayHeader.append(city,icon)
+            var country = $("<h4>").text(countryName)
             var CTemp = (data.list[0].main.temp) - 273.15
             var temp = $("<p>").text(`Temp: ${CTemp.toFixed(2)} ºC `)
             var wind = $("<p>").text(`Wind: ${data.list[0].wind.speed} KMP`)
             var humidity = $("<p>").text(`Humidity: ${data.list[0].main.humidity}%`)
-            $("#today").append(todayHeader,temp,wind,humidity)
+            $("#today").append(todayHeader,country,temp,wind,humidity)
             $("#today").addClass("today-border")
 
             for( var i = 0 ; i < listResult.length ; i+=8){
                 var day = $("<div>")
-                day.addClass("col-2 text-light eachDay")
+                day.addClass("col-lg-2  col-sm-5  mt-1 text-light eachDay")
                 var forecastTime = $("<h4>").text(dayjs.unix(listResult[i].dt).format("DD/MM/YY"))
                 var forecastIcon =$("<img>").attr("src",`https://openweathermap.org/img/wn/${listResult[i].weather[0].icon}@2x.png`)
                 forecastIcon.addClass("forecastIconImg pt-2 pb-2")
