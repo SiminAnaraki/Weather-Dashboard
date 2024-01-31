@@ -39,12 +39,16 @@ function search(event){
                  console.log(savedArray)
                  localStorage.setItem("city",JSON.stringify(savedArray))
                  fetchData(userInput)
+                 $("#history").empty()
+                 init()
                  return
              }
              }
         savedArray.push(userInput);
         localStorage.setItem("city",JSON.stringify(savedArray))
         fetchData(userInput)
+        $("#history").empty()
+        init()
         
 }}
 //function to handle history button click event
