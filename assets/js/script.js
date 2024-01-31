@@ -63,6 +63,8 @@ function historySearch(event){
             console.log(savedArray)
             localStorage.setItem("city",JSON.stringify(savedArray))
             fetchData(oldInput)
+            $("#history").empty()
+            init()
         }
         }
 }
